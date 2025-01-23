@@ -1,3 +1,12 @@
+**Descarga y configuracion de Arduino IDE**
+- Nos dirigimos a https://www.arduino.cc/en/software
+- Descargamos la version linux ZIP
+- Descomprimimos y ejecutamos el archivo "arduino-ide"
+- Una vez abierto el IDE en la esquina superior izquirda pulsamos "Select other board and port"
+- Buscamos y seleccionamos ESP32 Dev Module y a la derecha nos aparecera el puesto al que tenemos conectada la ESP32. Tras seleccionar le damos a "OK"
+
+
+
 **Primeras pruebas de codigo**
 
 El relé se enciende y se apaga con intervalo de un segundo
