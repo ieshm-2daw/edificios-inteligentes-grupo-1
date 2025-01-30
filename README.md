@@ -1,4 +1,9 @@
-**Lista de dispositivos**
+**Objetivo en el proyecto**
+Nuestro objetivo es utilizar dos ESP32 con un sensor de luminosidad en cada uno, estas placas se colocaran en dos ubicaciones de la clase para medir el nivel de luz en cada punto, estas dos placas harán un promedio para decidir si encender las luces o mantenerlas apagadas, Ejp: Si el promedio de ambas placas supera los 100 lux la luz se mantendrá apagada, en cambio si es menor a 100lux se encenderan las luces, todo esto se medirá cada 60 segundos, esto ayudará a que haya una visión clara en el aula.
+
+**¿Como lo vamos a hacer?**
+
+**Lista de dispositivos en el kit**
 
 **-Placa ESP32**
 
@@ -362,6 +367,7 @@ La ESP32 principal recibira los datos de luz de su sensor y de un sensor secunda
 #include <WiFi.h>
 #include <PubSubClient.h>
 
+//Definimos todo para conectar con MQTT
 
 #define WIFI_SSID "2DAW_IoT"
 #define WIFI_PASSWORD "Somos2DAW"
@@ -371,7 +377,7 @@ La ESP32 principal recibira los datos de luz de su sensor y de un sensor secunda
 #define MQTT_PASSWORD "mqtt"
 #define MQTT_TOPIC "g1/rele"
 
-
+//Definimos el relé
 #define SWITCH_BUILTIN 13
 
 
@@ -384,7 +390,7 @@ BH1750 sensor;
 WiFiClient espClient;
 PubSubClient client(espClient);
 
-
+//El callback lo utilizaremos para recibir por MQTT los datos del sensor de la placa 2
 void callback(char* topic, byte* payload, unsigned int length) {
  Serial.print("Mensaje recibido en el topic: ");
  Serial.println(topic);
@@ -406,7 +412,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
  }
 }
 
-
+//El reconnect se utiliza para verificar si estamos conectados a MQTT y si no lo esta o da fallo lo notifique
 void reconnect() {
  while (!client.connected()) {
    Serial.print("Conectando a MQTT...");
@@ -424,10 +430,13 @@ void reconnect() {
 
 
 void setup() {
+  //definimos el relé
  pinMode(SWITCH_BUILTIN, OUTPUT);
 
 
  Serial.begin(115200);
+
+//Utilizamos el sensor
  Wire.begin();
  sensor.begin();
 
