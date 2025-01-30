@@ -14,63 +14,63 @@ Se trata de un microcontrolador que integra tecnologías WiFi y Bluetooth, que l
 Es una tarjeta de desarrollo WIFI/Bluetooth, tiene las mismas características que otras placas ESP32 y se puede programar con microPython, LUA y Arduino IDE. Se puede alimentar mediante MicroUSB.
 
 
-**-Cable alimentación usb-c usb**
+**-Cable alimentación USB-C USB**
 
 ![Cable de alimentacion](https://portdesigns.com/img/cms/Produits/ALIM%2065W%20USB-C%20900097B-UK/900097B-UK%20-%20PORT%20-%20UNIVERSAL%20POWER%20SUPPLY%20BUDGET%2065W%20-%20TOP%20PICTO.jpg)
 
 Se emplea para transmitir energía o datos desde un punto a otro.
 
 
-**-Sensor de gas co2 tvoc ccs811**
+**-Sensor de gas CO2 TVOC CCS811**
 
 ![Sensor de gas CO2](https://m.media-amazon.com/images/I/51qY+fz1otL.jpg)
 
 Mide los valores de CO2 durante largos periodos de tiempo, mediante la absorción de una luz infrarroja en una longitud de onda específica.
 
 
-**-Sensor de iluminación bh1750**
+**-Sensor de iluminación BH1750**
 
 ![Sensor iluminacion](https://naylampmechatronics.com/170-home_default/modulo-sensor-de-luz-digital-bh1750.jpg)
 
 El sensor de iluminación es un sensor digital de luz ambiental que mide la intensidad lumínica en lux.
 
 
-**-Sensor pir**
+**-Sensor PIR**
 
 ![Sensor PIR](https://www.prometec.net/wp-content/uploads/2015/09/HC-SR501.jpg)
 
 El sensor pir es un dispositivo electrónico que se utiliza para detectar la presencia o ausencia en un área. 
 
 
-**-Módulo rfid mrc522**
+**-Módulo RFID MRC522**
 
 ![Módulo rfid mrc522](https://www.turibot.es/images/thumbs/0012259_modulo-rfid-rc522-de-135mhz-con-tarjeta-y-etiqueta_600.jpeg)
 
 La tecnología rfid es un sistema de identificación de productos por radiofrecuencia
 
 
-**-Sensor de corriente sct-013 30A**
+**-Sensor de corriente SCT-013 30A**
 
 ![Sensor de corriente sct-013 30A](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSF8soM0R9scS4V-dF_OxEngltQ4lQzdAc-ug&s)
 
 Los sensores de corriente detectan el campo magnético producido cuando una corriente circula a través del cable a medir. 
 
 
-**-Sensor de sonido jy-038**
+**-Sensor de sonido JY-038**
 
 ![Sensor de sonido jy-038](https://m.media-amazon.com/images/I/71iptWHmWpL.jpg)
 
 El sensor de sonido transforma la intensidad del sonido en el ambiente, en señales eléctricas.
 
 
-**-Sensor mov. microondas rcwll0516**
+**-Sensor mov. microondas RCWll0516**
 
 ![Sensor mov. microondas rcwll0516](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRw1SPznC8rUSBemvbBsKqahQO3irkfm2pYWw&s)
 
 El sensor mov. microondas emite señales de microondas continuas, que rebotan en los objetos en su área de detección y regresan al sensor , cuando las señales reflejadas tienen la misma frecuencia que las de salida no hay movimiento.
 
 
-**-Módulo amplificación señal lm358**
+**-Módulo amplificación señal LM358**
 
 ![Módulo amplificación señal lm358](https://m.media-amazon.com/images/I/71uNzm6W-1L.jpg)
 
@@ -126,7 +126,7 @@ Esta carcasa trae un disipador el cual nos sirve para extraer el calor generado 
 Dispositivo que se utiliza para convertir la corriente De la red eléctrica en una forma de energía adecuada para los componentes de un dispositivo o sistema electrónico
 
 
-**-Tarjeta microsd 32GB**
+**-Tarjeta micro SD 32GB**
 
 ![Tarjeta microsd 32GB](https://static.fnac-static.com/multimedia/Images/ES/NR/5c/32/06/406108/1540-4/tsp20160812185213/Sandisk-MicroSD-32-GB.jpg)
 
