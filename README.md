@@ -139,7 +139,9 @@ Son dispositivos que nos permiten expandir el sistema de almacenamiento del disp
 - Descargamos la version linux ZIP
 - Descomprimimos y ejecutamos el archivo "arduino-ide"
 - Una vez abierto el IDE en la esquina superior izquirda pulsamos "Select other board and port"
+- Instalamos la extension esp32
 - Buscamos y seleccionamos ESP32 Dev Module y a la derecha nos aparecera el puesto al que tenemos conectada la ESP32. Tras seleccionar le damos a "OK"
+
 
 
 
