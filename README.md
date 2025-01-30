@@ -349,3 +349,16 @@ void loop() {
 }
 
 ```
+
+
+**Automatización de la iluminación de clase**
+Para automatizar la iluminacion utilizaremos 2 sensores de luz conectado a su propia ESP32 en diferentes zonas de la clase para una mayor efectividad.
+
+La ESP32 principal recibira los datos de luz de su sensor y de un sensor secundario y dependiendo del nivel de luminosidad de las distintas zonas encendera o apagara el rele.
+
+```ccp
+```
+
+La ESP32 secundaria recibira los datos de luz de su sensor y los enviara a la ESP32 principal que controla el rele
+```ccp
+```
