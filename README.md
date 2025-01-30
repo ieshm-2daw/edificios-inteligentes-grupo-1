@@ -1,3 +1,11 @@
+**Lista de dispositivos**
+
+**-Placa ESP32**
+![placa ESP32](https://tienda.bricogeek.com/img/p/5/8/3/3/5833.jpg)
+Se trata de un microcontrolador que integra tecnologías WiFi y Bluetooth, que le proporcionan conectividad con internet u otros dispositivos.
+
+
+
 **Descarga y configuracion de Arduino IDE**
 - Nos dirigimos a https://www.arduino.cc/en/software
 - Descargamos la version linux ZIP
