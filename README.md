@@ -76,19 +76,6 @@ Dispositivo que se utiliza para convertir la corriente De la red eléctrica en u
 ![Tarjeta microsd 32GB](https://static.fnac-static.com/multimedia/Images/ES/NR/5c/32/06/406108/1540-4/tsp20160812185213/Sandisk-MicroSD-32-GB.jpg)
 Son dispositivos que nos permiten expandir el sistema de almacenamiento del dispositivo
 
-**-**
-![]()
-
-**-**
-![]()
-
-**-**
-![]()
-
-**-**
-![]()
-
-
 
 **Descarga y configuracion de Arduino IDE**
 - Nos dirigimos a https://www.arduino.cc/en/software
