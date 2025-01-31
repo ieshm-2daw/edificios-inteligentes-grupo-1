@@ -151,6 +151,18 @@ Son dispositivos que nos permiten expandir el sistema de almacenamiento del disp
 - Buscamos y seleccionamos ESP32 Dev Module y a la derecha nos aparecera el puesto al que tenemos conectada la ESP32. Tras seleccionar le damos a "OK"
 
 
+  **Mediciones de luz**
+Promedio de iluminacion de lo 2 sensores
++------------------+----------------------+----------------------+
+|                  |  persianas abiertas  |  persianas cerradas  |
++------------------+----------------------+----------------------+
+|  luz encendida   |          130         |         48           |
++------------------+----------------------+----------------------+
+|  luz apagada     |          107         |         21           |
++------------------+----------------------+----------------------+
+
+
+
 
 
 **Primeras pruebas de codigo**
