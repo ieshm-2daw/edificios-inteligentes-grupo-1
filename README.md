@@ -2,6 +2,9 @@
 Nuestro objetivo es utilizar dos ESP32 con un sensor de luminosidad en cada uno, estas placas se colocaran en dos ubicaciones de la clase para medir el nivel de luz en cada punto, estas dos placas harán un promedio para decidir si encender las luces o mantenerlas apagadas, Ejp: Si el promedio de ambas placas supera los 100 lux la luz se mantendrá apagada, en cambio si es menor a 100lux se encenderan las luces, todo esto se medirá cada 60 segundos, esto ayudará a que haya una visión clara en el aula.
 
 **¿Como lo vamos a hacer?**
+Tendremos dos ESP32 y cada uno tendrá un medidor de lúmenes cada uno, el primer sensor (que será el proincipal) mostrará la cantidad de lúmenes que recibe su sensor, y estará escuchando conectada mediante MQTT al sensor secundario, esperando a recibir datos para mostrarlos con los datos del primer sensor. El segundo sensor recibirá los lúmenes y los enviará a la ESP32 principal mediante MQTT.
+
+Para que se haga más efectivo, mediremos el promedio de ambos sensores y si la cantidad de lúmenes supera una cierta cantidad, encendemos la luz para una mejor vision, para que esto funcione conectaremos un relé a la ESP32 principal.
 
 **Lista de dispositivos en el kit**
 
