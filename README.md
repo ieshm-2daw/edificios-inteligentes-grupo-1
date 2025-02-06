@@ -151,6 +151,15 @@ Son dispositivos que nos permiten expandir el sistema de almacenamiento del disp
 - Buscamos y seleccionamos ESP32 Dev Module y a la derecha nos aparecera el puesto al que tenemos conectada la ESP32. Tras seleccionar le damos a "OK"
 
 
+**Conexiónes**
+
+ESP32 Principal
+![ESP32 Principal](imagenes/conexiones_esp32_principal.jpeg)
+
+ESP32 Secundaria
+![ESP32 Secundaria](imagenes/conexiones_esp32_secundaria.jpeg)
+
+
   **Mediciones de luz**
 Promedio de iluminacion de los 2 sensores
 
