@@ -46,12 +46,40 @@ Este módulo sirve para controlar todo tipo de electrodomésticos y dispositivos
 - Buscamos y seleccionamos ESP32 Dev Module y a la derecha nos aparecera el puesto al que tenemos conectada la ESP32. Tras seleccionar le damos a "OK"
 
 
-**Conexiónes**
+# Conexiónes
 
-ESP32 Principal
+**ESP32 Principal**
+Para esta placa conectaremos el sensor de luminosidad BH1750 a la ESP32 mediante las siguientes conexiones:
+
+| BH1750   | ESP32 |
+|----------------|-------------------|
+| VCC  | 3V3               |
+| GND  | GND               |
+| SCL  | D22               |
+| SDA  | D21               |
+
+A continuacion conectaremos el relé a la misma ESP32 mediante las siguientes conexiones:
+
+| Relé   | ESP32 |
+|----------------|-------------------|
+| VCC  | VIN               |
+| IN   | D13               |
+| GND  | GND               |
+
+Foto de las conexiones
 ![ESP32 Principal](imagenes/conexiones_esp32_principal.jpeg)
 
-ESP32 Secundaria
+**ESP32 Secundaria**
+En la ESP32 secundaria solo conectaremos un sensor de luminosidad BH1750 con las mismas conexiones que antes:
+
+| BH1750   | ESP32 |
+|----------------|-------------------|
+| VCC  | 3V3               |
+| GND  | GND               |
+| SCL  | D22               |
+| SDA  | D21               |
+
+Foto de las conexiones
 ![ESP32 Secundaria](imagenes/conexiones_esp32_secundaria.jpeg)
 
 
