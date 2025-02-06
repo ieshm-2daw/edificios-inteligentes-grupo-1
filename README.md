@@ -379,8 +379,8 @@ La ESP32 principal recibirá los datos de luz de su sensor y de un sensor secund
 ```ccp
 #include <WiFi.h>
 #include <PubSubClient.h>
-
-//Definimos todo para conectar con MQTT
+#include <BH1750.h>
+#include <Wire.h>
 
 #define WIFI_SSID "2DAW_IoT"
 #define WIFI_PASSWORD "Somos2DAW"
@@ -390,101 +390,93 @@ La ESP32 principal recibirá los datos de luz de su sensor y de un sensor secund
 #define MQTT_PASSWORD "mqtt"
 #define MQTT_TOPIC "g1/rele"
 
-//Definimos el relé
-#define SWITCH_BUILTIN 13
+#define RELAY_PIN 13  // Pin donde está conectado el relé
 
-
-//definimos sensor principal
-#include <BH1750.h>
-#include <Wire.h>
 BH1750 sensor;
-
-
 WiFiClient espClient;
 PubSubClient client(espClient);
 
-//El callback lo utilizaremos para recibir por MQTT los datos del sensor de la placa 2
+int luxSecundaria = 0;  // Almacena la lectura de la ESP32 secundaria
+
 void callback(char* topic, byte* payload, unsigned int length) {
- Serial.print("Mensaje recibido en el topic: ");
- Serial.println(topic);
+  Serial.print("Mensaje recibido en el topic: ");
+  Serial.println(topic);
 
-
- String luxStr = "";
- for (int i = 0; i < length; i++) {
-   luxStr += (char)payload[i];
- }
- Serial.print("Nivel de luz placa 2: ");
- Serial.println(luxStr);
-
-
- int luxSecundaria = luxStr.toInt();
- if (luxSecundaria > 10) {
-   digitalWrite(SWITCH_BUILTIN, HIGH);
- } else if (luxSecundaria < 8) {
-   digitalWrite(SWITCH_BUILTIN, LOW);
- }
+  String luxStr = "";
+  for (int i = 0; i < length; i++) {
+    luxStr += (char)payload[i];
+  }
+  
+  luxSecundaria = luxStr.toInt();  // Convertir a entero
+  Serial.print("Nivel de luz de ESP32 secundaria: ");
+  Serial.println(luxSecundaria);
 }
 
-//El reconnect se utiliza para verificar si estamos conectados a MQTT y si no lo esta o da fallo lo notifique
 void reconnect() {
- while (!client.connected()) {
-   Serial.print("Conectando a MQTT...");
-   if (client.connect("ESP32Subscriber", MQTT_USER, MQTT_PASSWORD)) {
-     Serial.println("Conectado a MQTT");
-     client.subscribe(MQTT_TOPIC);
-   } else {
-     Serial.print("Error, rc=");
-     Serial.print(client.state());
-     Serial.println(" Intentando de nuevo en 2 segundos...");
-     delay(2000);
-   }
- }
+  while (!client.connected()) {
+    Serial.print("Conectando a MQTT...");
+    if (client.connect("ESP32_Principal", MQTT_USER, MQTT_PASSWORD)) {
+      Serial.println("Conectado a MQTT");
+      client.subscribe(MQTT_TOPIC);
+    } else {
+      Serial.print("Error, rc=");
+      Serial.print(client.state());
+      Serial.println(" Intentando de nuevo en 2 segundos...");
+      delay(2000);
+    }
+  }
 }
-
 
 void setup() {
-  //definimos el relé
- pinMode(SWITCH_BUILTIN, OUTPUT);
+  Serial.begin(115200);
+  Wire.begin();
+  
+  if (!sensor.begin(BH1750::CONTINUOUS_HIGH_RES_MODE)) {
+    Serial.println("Error al iniciar el sensor BH1750");
+    while (1);  // Detener el programa si el sensor no se inicia correctamente
+  }
 
+  pinMode(RELAY_PIN, OUTPUT);
+  digitalWrite(RELAY_PIN, LOW);  // Asegurar que el relé está apagado al inicio
 
- Serial.begin(115200);
+  // Conectar WiFi
+  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(1000);
+    Serial.print(".");
+  }
+  Serial.println("\nConectado a WiFi");
 
-//Utilizamos el sensor
- Wire.begin();
- sensor.begin();
-
-
- // Conexión WiFi
- Serial.print("Conectando a WiFi");
- WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
- while (WiFi.status() != WL_CONNECTED) {
-   delay(1000);
-   Serial.print(".");
- }
- Serial.println("\nConectado a WiFi");
-
-
- // Configuración MQTT
- client.setServer(MQTT_SERVER, MQTT_PORT);
- client.setCallback(callback);
-
-
- reconnect();
+  // Configurar MQTT
+  client.setServer(MQTT_SERVER, MQTT_PORT);
+  client.setCallback(callback);
+  reconnect();
 }
 
-
 void loop() {
- // Leer el nivel de luz de la placa principal
- float lux = sensor.readLightLevel();
- Serial.print("Nivel de luz placa principal: ");
- Serial.println(lux);
- delay(2000);
+  if (!client.connected()) {
+    reconnect();
+  }
+  client.loop();
 
+  // Leer nivel de luz local
+  float luxPrincipal = sensor.readLightLevel();
+  Serial.print("Nivel de luz ESP32 Principal: ");
+  Serial.println(luxPrincipal);
 
- if (!client.connected()) {
-   reconnect();
- }
- client.loop();
+  // Promedio de ambas mediciones
+  int luxPromedio = (luxPrincipal + luxSecundaria) / 2;
+  Serial.print("Nivel de luz promedio: ");
+  Serial.println(luxPromedio);
+
+  // Control del relé
+  if (luxPromedio < 105) {
+    digitalWrite(RELAY_PIN, HIGH);  // Encender el relé si no hay suficiente luz
+  } else if (luxPromedio > 130) {
+    digitalWrite(RELAY_PIN, LOW);  // Apagar si hay poca luz
+  }
+
+  delay(5000);
 }
 
 ```
@@ -496,7 +488,6 @@ La ESP32 secundaria recibirá los datos de luz de su sensor y los enviará a la 
 #include <BH1750.h>
 #include <Wire.h>
 
-
 #define WIFI_SSID "2DAW_IoT"
 #define WIFI_PASSWORD "Somos2DAW"
 #define MQTT_SERVER "192.168.100.101"
@@ -505,71 +496,63 @@ La ESP32 secundaria recibirá los datos de luz de su sensor y los enviará a la 
 #define MQTT_PASSWORD "mqtt"
 #define MQTT_TOPIC "g1/rele"
 
-
 BH1750 sensor;
 WiFiClient espClient;
 PubSubClient client(espClient);
 
-
 void reconnect() {
- while (!client.connected()) {
-   Serial.print("Conectando a MQTT...");
-   if (client.connect("ESP32_Secundaria", MQTT_USER, MQTT_PASSWORD)) {
-     Serial.println("Conectado a MQTT");
-   } else {
-     Serial.print("Error, rc=");
-     Serial.print(client.state());
-     Serial.println(" Intentando de nuevo en 2 segundos...");
-     delay(2000);
-   }
- }
+  while (!client.connected()) {
+    Serial.print("Conectando a MQTT...");
+    if (client.connect("ESP32_Secundaria", MQTT_USER, MQTT_PASSWORD)) {
+      Serial.println("Conectado a MQTT");
+    } else {
+      Serial.print("Error, rc=");
+      Serial.print(client.state());
+      Serial.println(" Intentando de nuevo en 2 segundos...");
+      delay(2000);
+    }
+  }
 }
-
 
 void setup() {
- Serial.begin(115200);
- Wire.begin();
+  Serial.begin(115200);
+  Wire.begin();
+  
   if (!sensor.begin(BH1750::CONTINUOUS_HIGH_RES_MODE)) {
-   Serial.println("Error al iniciar el sensor BH1750");
-   while (1);  // Si falla, detener el programa
- }
+    Serial.println("Error al iniciar el sensor BH1750");
+    while (1);  // Si falla, detener el programa
+  }
 
+  // Conectar WiFi
+  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(1000);
+    Serial.print(".");
+  }
+  Serial.println("\nConectado a WiFi");
 
- // Conectar WiFi
- WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
- while (WiFi.status() != WL_CONNECTED) {
-   delay(1000);
-   Serial.print(".");
- }
- Serial.println("\nConectado a WiFi");
-
-
- // Configurar MQTT
- client.setServer(MQTT_SERVER, MQTT_PORT);
- reconnect();
+  // Configurar MQTT
+  client.setServer(MQTT_SERVER, MQTT_PORT);
+  reconnect();
 }
 
-
 void loop() {
- if (!client.connected()) {
-   reconnect();
- }
- client.loop();
+  if (!client.connected()) {
+    reconnect();
+  }
+  client.loop();
 
+  // Leer el nivel de luzclient.publish(MQTT_TOPIC, luxStr);
+  float lux = sensor.readLightLevel();
+  Serial.print("Nivel de luz placa Secundaria: ");
+  Serial.println(lux);
 
- // Leer el nivel de luzclient.publish(MQTT_TOPIC, luxStr);
- float lux = sensor.readLightLevel();
- Serial.print("Nivel de luz placa Secundaria: ");
- Serial.println(lux);
+  // Convertir el valor a string antes de enviarlo por MQTT
+  char luxStr[10];
+  dtostrf(lux, 6, 2, luxStr);
+  client.publish(MQTT_TOPIC, luxStr);
 
-
- // Convertir el valor a string antes de enviarlo por MQTT
- char luxStr[10];
- dtostrf(lux, 6, 2, luxStr);
- client.publish(MQTT_TOPIC, luxStr);
-
-
- delay(2000);
+  delay(2000);
 }
 
 ```
