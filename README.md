@@ -10,7 +10,7 @@ Para que se haga más efectivo, mediremos el promedio de ambos sensores y si la 
 
 **-Placa ESP32**
 
-![placa ESP32](https://tienda.bricogeek.com/img/p/5/8/3/3/5833.jpg)
+![placa ESP32](imagenes/esp32.jpeg)
 
 Se trata de un microcontrolador que integra tecnologías WiFi y Bluetooth, que le proporcionan conectividad con internet u otros dispositivos.
 
@@ -24,7 +24,7 @@ Es una tarjeta de desarrollo WIFI/Bluetooth, tiene las mismas características q
 
 **-Sensor de iluminación BH1750**
 
-![Sensor iluminacion](https://naylampmechatronics.com/170-home_default/modulo-sensor-de-luz-digital-bh1750.jpg)
+![Sensor iluminacion](imagenes/BH1750.jpeg)
 
 El sensor de iluminación es un sensor digital de luz ambiental que mide la intensidad lumínica en lux.
 
@@ -34,16 +34,6 @@ El sensor de iluminación es un sensor digital de luz ambiental que mide la inte
 ![Módulo de relé optoacoplador 3V](imagenes/fotoRele.jpg)
 
 Este módulo sirve para controlar todo tipo de electrodomésticos y dispositivos de carga de alta corriente como ventiladores funcionando como un interruptor activado mediante la luz emitida por un diodo red.
-
-
-
-
-**-Fuente de alimentación 5.5V/5.1A USB-C**
-
-![Fuente de alimentación 5.5V/5.1A USB-C](https://www.tiendatec.es/9826-large_default/fuente-alimentacion-usb-c-pd-gan-5-1v-5a-27w.jpg)
-
-Dispositivo que se utiliza para convertir la corriente De la red eléctrica en una forma de energía adecuada para los componentes de un dispositivo o sistema electrónico
-
 
 
 
