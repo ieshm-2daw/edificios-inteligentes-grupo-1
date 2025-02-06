@@ -31,7 +31,7 @@ El sensor de iluminación es un sensor digital de luz ambiental que mide la inte
 
 **-Módulo de relé optoacoplador 3V**
 
-![Módulo de relé optoacoplador 3V](https://m.media-amazon.com/images/I/51KshDr22-L._AC_UF894,1000_QL80_.jpg)
+![Módulo de relé optoacoplador 3V](imagenes/fotoRele.jpg)
 
 Este módulo sirve para controlar todo tipo de electrodomésticos y dispositivos de carga de alta corriente como ventiladores funcionando como un interruptor activado mediante la luz emitida por un diodo red.
 
