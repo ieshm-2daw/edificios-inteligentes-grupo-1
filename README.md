@@ -332,7 +332,7 @@ void loop() {
 
 ```
 
-Encender el rele segun la cantidad de luz detectada
+Encender el relé según la cantidad de luz detectada
 
 ```cpp
 
@@ -374,7 +374,7 @@ void loop() {
 **Automatización de la iluminación de clase**
 Para automatizar la iluminacion utilizaremos 2 sensores de luz conectado a su propia ESP32 en diferentes zonas de la clase para una mayor efectividad.
 
-La ESP32 principal recibira los datos de luz de su sensor y de un sensor secundario y dependiendo del nivel de luminosidad de las distintas zonas encendera o apagara el rele.
+La ESP32 principal recibirá los datos de luz de su sensor y de un sensor secundario y dependiendo del nivel de luminosidad de las distintas zonas encenderá o apagará el relé.
 
 ```ccp
 #include <WiFi.h>
@@ -489,7 +489,7 @@ void loop() {
 
 ```
 
-La ESP32 secundaria recibira los datos de luz de su sensor y los enviara a la ESP32 principal que controla el rele
+La ESP32 secundaria recibirá los datos de luz de su sensor y los enviará a la ESP32 principal que controla el relé
 ```ccp
 #include <WiFi.h>
 #include <PubSubClient.h>
