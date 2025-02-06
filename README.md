@@ -152,9 +152,9 @@ Son dispositivos que nos permiten expandir el sistema de almacenamiento del disp
 
 
   **Mediciones de luz**
-Promedio de iluminacion de lo 2 sensores
+Promedio de iluminacion de los 2 sensores
 +------------------+----------------------+----------------------+
-|                  |  persianas abiertas  |  persianas cerradas  |
+| ................ |  persianas abiertas  |  persianas cerradas  |
 +------------------+----------------------+----------------------+
 |  luz encendida   |          130         |         48           |
 +------------------+----------------------+----------------------+
