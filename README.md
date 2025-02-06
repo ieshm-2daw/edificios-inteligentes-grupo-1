@@ -1,4 +1,4 @@
-**Objetivo en el proyecto**
+# Objetivo en el proyecto
 Nuestro objetivo es utilizar dos ESP32 con un sensor de luminosidad en cada uno, estas placas se colocaran en dos ubicaciones de la clase para medir el nivel de luz en cada punto, estas dos placas harán un promedio para decidir si encender las luces o mantenerlas apagadas, Ejp: Si el promedio de ambas placas supera los 100 lux la luz se mantendrá apagada, en cambio si es menor a 100lux se encenderan las luces, todo esto se medirá cada 60 segundos, esto ayudará a que haya una visión clara en el aula.
 
 **¿Como lo vamos a hacer?**
@@ -6,7 +6,7 @@ Tendremos dos ESP32 y cada uno tendrá un medidor de lúmenes cada uno, el prime
 
 Para que se haga más efectivo, mediremos el promedio de ambos sensores y si la cantidad de lúmenes supera una cierta cantidad, encendemos la luz para una mejor vision, para que esto funcione conectaremos un relé a la ESP32 principal.
 
-**Lista de dispositivos en el kit**
+# Lista de dispositivos en el kit
 
 **-Placa ESP32**
 
@@ -36,19 +36,10 @@ El sensor de iluminación es un sensor digital de luz ambiental que mide la inte
 Este módulo sirve para controlar todo tipo de electrodomésticos y dispositivos de carga de alta corriente como ventiladores funcionando como un interruptor activado mediante la luz emitida por un diodo red.
 
 
-
-**Descarga y configuracion de Arduino IDE**
-- Nos dirigimos a https://www.arduino.cc/en/software
-- Descargamos la version linux ZIP
-- Descomprimimos y ejecutamos el archivo "arduino-ide"
-- Una vez abierto el IDE en la esquina superior izquirda pulsamos "Select other board and port"
-- Instalamos la extension esp32
-- Buscamos y seleccionamos ESP32 Dev Module y a la derecha nos aparecera el puesto al que tenemos conectada la ESP32. Tras seleccionar le damos a "OK"
-
-
 # Conexiónes
 
-**ESP32 Principal**
+**ESP32 Principal**  
+
 Para esta placa conectaremos el sensor de luminosidad BH1750 a la ESP32 mediante las siguientes conexiones:
 
 | BH1750   | ESP32 |
@@ -69,7 +60,8 @@ A continuacion conectaremos el relé a la misma ESP32 mediante las siguientes co
 Foto de las conexiones
 ![ESP32 Principal](imagenes/conexiones_esp32_principal.jpeg)
 
-**ESP32 Secundaria**
+**ESP32 Secundaria**  
+
 En la ESP32 secundaria solo conectaremos un sensor de luminosidad BH1750 con las mismas conexiones que antes:
 
 | BH1750   | ESP32 |
@@ -82,6 +74,15 @@ En la ESP32 secundaria solo conectaremos un sensor de luminosidad BH1750 con las
 Foto de las conexiones
 ![ESP32 Secundaria](imagenes/conexiones_esp32_secundaria.jpeg)
 
+
+
+# Descarga y configuracion de Arduino IDE
+- Nos dirigimos a https://www.arduino.cc/en/software
+- Descargamos la version linux ZIP
+- Descomprimimos y ejecutamos el archivo "arduino-ide"
+- Una vez abierto el IDE en la esquina superior izquirda pulsamos "Select other board and port"
+- Instalamos la extension esp32
+- Buscamos y seleccionamos ESP32 Dev Module y a la derecha nos aparecera el puesto al que tenemos conectada la ESP32. Tras seleccionar le damos a "OK"
 
   **Mediciones de luz**
 Promedio de iluminacion de los 2 sensores
@@ -107,12 +108,12 @@ La ESP32 principal recibirá los datos de luz de su sensor y de un sensor secund
 #include <BH1750.h>
 #include <Wire.h>
 
-#define WIFI_SSID "2DAW_IoT"
-#define WIFI_PASSWORD "Somos2DAW"
-#define MQTT_SERVER "192.168.100.101"
+#define WIFI_SSID "(nombre de tu red)"
+#define WIFI_PASSWORD "(contraseña de la red)"
+#define MQTT_SERVER "(ip de tu servidor)"
 #define MQTT_PORT 1883
-#define MQTT_USER "mqtt"
-#define MQTT_PASSWORD "mqtt"
+#define MQTT_USER "(usuario de mqtt)"
+#define MQTT_PASSWORD "(contraseña del usuario de mqtt)"
 #define MQTT_TOPIC "g1/rele"
 
 #define RELAY_PIN 13  // Pin donde está conectado el relé
@@ -213,12 +214,12 @@ La ESP32 secundaria recibirá los datos de luz de su sensor y los enviará a la 
 #include <BH1750.h>
 #include <Wire.h>
 
-#define WIFI_SSID "2DAW_IoT"
-#define WIFI_PASSWORD "Somos2DAW"
-#define MQTT_SERVER "192.168.100.101"
+#define WIFI_SSID "(nombre de tu red)"
+#define WIFI_PASSWORD "(contraseña de la red)"
+#define MQTT_SERVER "(ip de tu servidor)"
 #define MQTT_PORT 1883
-#define MQTT_USER "mqtt"
-#define MQTT_PASSWORD "mqtt"
+#define MQTT_USER "(usuario de mqtt)"
+#define MQTT_PASSWORD "(contraseña del usuario de mqtt)"
 #define MQTT_TOPIC "g1/rele"
 
 BH1750 sensor;
