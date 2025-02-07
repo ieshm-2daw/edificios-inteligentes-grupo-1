@@ -70,6 +70,8 @@ A continuacion conectaremos el relé a la ESP32 mediante las siguientes conexion
 **Foto de las conexiones**
 ![ESP32 Principal](imagenes/conexiones_esp32_principal.jpeg)
 
+![esquema principal](imagenes/esquema_principal.png)
+
 **Programacion de la placa**  
 
 Si solo vamos a tener un sensor de luminosidad usaremos este codigo
@@ -227,6 +229,8 @@ En la ESP32 secundaria solo conectaremos un sensor de luminosidad BH1750 con las
 
 **Foto de las conexiones**
 ![ESP32 Secundaria](imagenes/conexiones_esp32_secundaria.jpeg)  
+
+![esquema secundaria](imagenes/esquema_secundaria.png)
 
 **Programacion de la placa**  
 La ESP32 secundaria recibirá los datos de luz de su sensor y los enviará a la ESP32 principal que controla el relé
