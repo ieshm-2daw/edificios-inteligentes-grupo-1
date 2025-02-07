@@ -39,10 +39,16 @@ El sensor de iluminación es un sensor digital de luz ambiental que mide la inte
 
 Este módulo sirve para controlar todo tipo de electrodomésticos y dispositivos de carga de alta corriente como ventiladores funcionando como un interruptor activado mediante la luz emitida por un diodo red.
 
+# Descarga y configuracion de Arduino IDE
+- Nos dirigimos a https://www.arduino.cc/en/software
+- Descargamos la version linux ZIP
+- Descomprimimos y ejecutamos el archivo "arduino-ide"
+- Una vez abierto el IDE en la esquina superior izquirda pulsamos "Select other board and port"
+- Instalamos la extension esp32
+- Buscamos y seleccionamos ESP32 Dev Module y a la derecha nos aparecera el puesto al que tenemos conectada la ESP32. Tras seleccionar le damos a "OK"
 
-# Conexiónes
-
-**ESP32 Principal**  
+# ESP32 Principal  
+## Conexiónes  
 
 Para esta placa conectaremos el sensor de luminosidad BH1750 a la ESP32 mediante las siguientes conexiones:
 
@@ -53,7 +59,7 @@ Para esta placa conectaremos el sensor de luminosidad BH1750 a la ESP32 mediante
 | SCL  | D22               |
 | SDA  | D21               |
 
-A continuacion conectaremos el relé a la misma ESP32 mediante las siguientes conexiones:
+A continuacion conectaremos el relé a la ESP32 mediante las siguientes conexiones:
 
 | Relé   | ESP32 |
 |----------------|-------------------|
@@ -61,50 +67,43 @@ A continuacion conectaremos el relé a la misma ESP32 mediante las siguientes co
 | IN   | D13               |
 | GND  | GND               |
 
-Foto de las conexiones
+**Foto de las conexiones**
 ![ESP32 Principal](imagenes/conexiones_esp32_principal.jpeg)
 
-**ESP32 Secundaria**  
+**Programacion de la placa**  
 
-En la ESP32 secundaria solo conectaremos un sensor de luminosidad BH1750 con las mismas conexiones que antes:
+Si solo vamos a tener un sensor de luminosidad usaremos este codigo
+```ccp
+#include <BH1750.h>
+#include <Wire.h>
 
-| BH1750   | ESP32 |
-|----------------|-------------------|
-| VCC  | 3V3               |
-| GND  | GND               |
-| SCL  | D22               |
-| SDA  | D21               |
+BH1750 sensor;
 
-Foto de las conexiones
-![ESP32 Secundaria](imagenes/conexiones_esp32_secundaria.jpeg)
+void setup() {
+  // put your setup code here, to run once:
+  Wire.begin();
+  sensor.begin();
+  Serial.begin(115200);
+}
 
+void loop() {
+  // put your main code here, to run repeatedly:
+  unsigned int lux = sensor.readLightLevel();
+  Serial.print("Nivel: ");
+  Serial.print(lux);
+  Serial.println(" lx");
 
+if (lux < 105) {
+    digitalWrite(RELAY_PIN, HIGH);  // Encender el relé si no hay suficiente luz
+  } else if (lux > 130) {
+    digitalWrite(RELAY_PIN, LOW);  // Apagar si hay poca luz
+  }
+  delay(1000);
+}
 
-# Descarga y configuracion de Arduino IDE
-- Nos dirigimos a https://www.arduino.cc/en/software
-- Descargamos la version linux ZIP
-- Descomprimimos y ejecutamos el archivo "arduino-ide"
-- Una vez abierto el IDE en la esquina superior izquirda pulsamos "Select other board and port"
-- Instalamos la extension esp32
-- Buscamos y seleccionamos ESP32 Dev Module y a la derecha nos aparecera el puesto al que tenemos conectada la ESP32. Tras seleccionar le damos a "OK"
+```
 
-  **Mediciones de luz**
-Promedio de iluminacion de los 2 sensores
-
-| Estado de luz   | Persianas Abiertas | Persianas Cerradas |
-|----------------|-------------------|-------------------|
-| Luz encendida  | 130               | 48                |
-| Luz apagada    | 107               | 21                |
-
-
-
-
-
-
-**Automatización de la iluminación de clase**
-Para automatizar la iluminacion utilizaremos 2 sensores de luz conectado a su propia ESP32 en diferentes zonas de la clase para una mayor efectividad.
-
-La ESP32 principal recibirá los datos de luz de su sensor y de un sensor secundario y dependiendo del nivel de luminosidad de las distintas zonas encenderá o apagará el relé.
+En el caso de que queramos tener mas de un sensor la ESP32 principal recibirá los datos de luz de su sensor y de un sensor secundario y dependiendo del nivel de luminosidad de las distintas zonas encenderá o apagará el relé.
 
 ```ccp
 #include <WiFi.h>
@@ -211,6 +210,25 @@ void loop() {
 
 ```
 
+
+# ESP32 Secundaria  
+En el caso en el queramos tomar mediciones en mas de un sitio tendremos que conectar una segunda placa ESP32 la cual tendremos que configurar también.  
+
+## Conexiones  
+
+En la ESP32 secundaria solo conectaremos un sensor de luminosidad BH1750 con las mismas conexiones que antes:
+
+| BH1750   | ESP32 |
+|----------------|-------------------|
+| VCC  | 3V3               |
+| GND  | GND               |
+| SCL  | D22               |
+| SDA  | D21               |
+
+**Foto de las conexiones**
+![ESP32 Secundaria](imagenes/conexiones_esp32_secundaria.jpeg)  
+
+**Programacion de la placa**  
 La ESP32 secundaria recibirá los datos de luz de su sensor y los enviará a la ESP32 principal que controla el relé
 ```ccp
 #include <WiFi.h>
@@ -286,3 +304,11 @@ void loop() {
 }
 
 ```
+
+  **Mediciones de luz**
+Promedio de iluminacion de los 2 sensores
+
+| Estado de luz   | Persianas Abiertas | Persianas Cerradas |
+|----------------|-------------------|-------------------|
+| Luz encendida  | 130               | 48                |
+| Luz apagada    | 107               | 21                |
