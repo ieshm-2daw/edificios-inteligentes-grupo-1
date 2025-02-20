@@ -323,3 +323,15 @@ Promedio de iluminacion de los 2 sensores
 
 ##Node-RED
 
+**Esquema Node-RED**
+![Esquema nodered](imagenes/nodered1.png)
+
+**Configuracion mqtt in**
+![Configuracion mqtt in](imagenes/nodo_mqtt_in.png)
+
+**Configuracion InfluxDB**
+![Configuracion influxdb](imagenes/nodo_influxdb_out.png)
+
+**Configuracion Debug**
+![Configuracion debug](imagenes/nodo_debug.png)
+
