@@ -316,3 +316,10 @@ Promedio de iluminacion de los 2 sensores
 |----------------|-------------------|-------------------|
 | Luz encendida  | 130               | 48                |
 | Luz apagada    | 107               | 21                |
+
+
+
+#Automatizacion con Node-RED y Home Assistant
+
+##Node-RED
+
